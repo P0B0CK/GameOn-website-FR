@@ -462,6 +462,13 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  /*----------------------------------------*/
+  /* Modificaton responsivité de l'hero-img */
+  /*----------------------------------------*/
+  object-fit: cover;
+  object-position: right;
+  /*----------------------------------------*/
+  /*----------------------------------------*/
 }
 .copyrights {
   color: #fe142f;
