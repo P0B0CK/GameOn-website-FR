@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8" />
-    <title>Reservation</title>
+    <title>Reservez votre place : GameOn</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="inscription.js" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans"
       rel="stylesheet"
     />
   </head>
+
   <body>
+
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
         <img alt="logo GameOn" src="Logo.png" width="auto" height="auto" />
+      </div>
+    
+
+      <!-- Suppression lien Accueil // Ajout du "mailto" // transformation nav en list -->
+      <ul class="main-navbar">
+        <a href="#"><li>Détails de l'évènement</li></a>
+        <a href="#"><li>À propos</li></a>
+        <a href="mailto:contact@gameon.com"><li>Contact</li></a>
+        <a href="#"><li>Évènements passés</li></a>
+        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </ul>
     </div>
-    <div class="main-navbar">
-      
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
-      <a href="#"><span>À propos</span></a>
-      <a href="#"><span>Contact</span></a>
-      <a href="#"><span>Évènements passés</span></a>
-      <a href="javascript:void(0);" class="icon" onclick="editNav()">
-        <i class="fa fa-bars"></i>
-      </a>
-    </div>
-    </div>
-  </div>
+
     <main>
       <div class="hero-section">
         <div class="hero-content">
@@ -45,7 +50,7 @@
           </button>
         </div>
         <div class="hero-img">
-          <img src="./bg_img.jpg" alt="img" />
+          <img src="./bg_img.jpg" alt="Joueuse de jeux vidéos exaltant sa victoire" />
         </div>
         <button class="btn-signup modal-btn">
           je m'inscris
@@ -56,26 +61,15 @@
         <div class="content">
           <span class="close"></span>
           <div class="modal-body">
-            <form
-              name="reserve"
-              action="index.html"
-              method="get"
-              onsubmit="return validate();"
-            >
-              <div
-                class="formData">
-                <label>Prénom</label><br>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="first"
-                  name="first"
-                  minlength="2"
-                /><br>
+
+            <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+              <div class="formData">
+                <label>Prénom</label><br/>
+                <input class="text-control" type="text" id="first" name="first" minlength="2"/><br/>
               </div>
-              <div
-                class="formData">
-                <label>Nom</label><br>
+
+              <div class="formData">
+                <label>Nom</label><br/>
                 <input
                   class="text-control"
                   type="text"
@@ -83,6 +77,7 @@
                   name="last"
                 /><br>
               </div>
+
               <div
                 class="formData">
                 <label>E-mail</label><br>
@@ -93,6 +88,7 @@
                   name="email"
                 /><br>
               </div>
+
               <div
                 class="formData">
                 <label>Date de naissance</label><br>
@@ -103,11 +99,13 @@
                   name="birthdate"
                 /><br>
               </div>
+
               <div
                 class="formData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
+
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
                 class="formData">
@@ -206,6 +204,7 @@
                 value="C'est parti"
               />
             </form>
+            
           </div>
         </div>
       </div>
