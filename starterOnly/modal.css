@@ -29,6 +29,12 @@ p {
 img {
   padding-right: 1rem;
 }
+@media screen and (max-width: 800px){
+  .logoSize {
+    width: 200px;
+    height: auto;
+  }
+}
 
 .topnav {
   overflow: hidden;
@@ -56,6 +62,7 @@ img {
 
 .topnav a:hover {
   text-decoration: underline;
+  text-underline-offset: 5px;
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
@@ -63,6 +70,7 @@ img {
 
 .topnav a.active {
   text-decoration: underline;
+  text-underline-offset: 5px;
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
@@ -80,8 +88,15 @@ li{
 @media screen and (max-width: 1020px) {
   .topnav a {display: none;}
   .topnav a.icon {
+    color: #ff0000;
     float: right;
     display: block;
+  }
+  .topnav a.icon:active {
+    color: white;
+  }
+  .topnav a.icon:hover {
+    color: white;
   }
 }
 
@@ -125,8 +140,13 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
+}
 
-
+@media screen and (max-width: 800px) {
+  main{
+    margin: 0;
+    padding: 5vw;
+  }
 }
 
 .modal-btn {
@@ -427,6 +447,15 @@ input[data-error]::after {
   box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
 }
+@media screen and (max-width: 800px){
+  .hero-section{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
 
 .hero-content {
   padding: 51px 67px;
@@ -451,17 +480,40 @@ input[data-error]::after {
   position: relative;
   z-index: 1;
 }
+
+@media screen and (max-width: 800px){
+  .hero-content{
+    min-width: 100%;
+    text-align: none;
+  }
+}
+
 .hero-headline {
   font-size: 6rem;
   font-weight: normal;
   white-space: nowrap;
 }
+
+@media screen and (max-width: 1020px) {
+  .hero-headline{
+    font-size: 4.5rem;
+  }
+}
+
 .hero-text {
   width: 146%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
 }
+
+@media screen and (max-width: 800px) {
+  .hero-text {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
 .btn-signup {
   outline: none;
   text-transform: capitalize;
@@ -522,13 +574,20 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 2.3rem;
     white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
+  @media screen and (max-width: 800px) {
+    .hero-text {
+      width: unset;
+      font-size: 1rem;
+    }
+  }
+
   .hero-img img {
     border-radius: 10px;
     margin-top: 40px;
