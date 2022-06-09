@@ -1,6 +1,5 @@
+/*span class="close"*/
 /* LES CHAMPS REQUIS */
-
-
 
 /* First and last NAME */
 
