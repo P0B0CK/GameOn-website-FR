@@ -242,7 +242,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.error-message{
+.message-error{
   color:#e54858;
 }
 .formData[data-error]::after {
