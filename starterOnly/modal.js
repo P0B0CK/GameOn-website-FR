@@ -67,47 +67,65 @@ function closeModal() {
 // DOM elements
 const form = document.getElementById('form');
 
+const firstName = document.getElementById('first');
+const lastName = document.getElementById('last');
+const mail = document.getElementById('email');
+const birth = document.getElementById('birthdate');
+const participation = document.getElementById('quantity');
+
+
 // Error Message
-const ErrorFirstName = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+const errorFirstName = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+const errorSpacingName = "Les espaces ne sont pas autorisés.";
+const errorNumberName = "Les chiffres ne sont pas autorisés."
 
-
+/*
 /**
  * Première implémentation d'une fonction
  * @param {Event} e 
  */
+
 function validate(e) {
-    alert("Submit du formulaire");
+    alert("Envoi du formulaire");
 }
+
+
 
 /**
  * Deuxième implémentation
  * @param {Event} e 
  */
-const submitHandler = (e) => {
-    e.preventDefault();
-    let bFirstName = checkFirstName();
-    //let bLastName = checkLastName();
-    //...
-    //...
-    //...
 
-    if(bFirstName)
-        alert("OK");
-
+function submitHandler(e) {
+  e.preventDefault();
+  let firstName = checkFirstName();
+  let lastName = checkLastName();
+  if (firstName)
+    alert("OK");
 }
 
-form.addEventListener('submit', submitHandler);
+//form.addEventListener('submit', submitHandler);
 
 /**
  * fonction de contrôl du champ FirstName
  */
+
+
 var checkFirstName = () => {
     let value = first.value;
     //test non concluant
     if (!value || value.length < 2) {
-        first.parentElement.lastElementChild.innerHTML = ErrorFirstName;
+        first.parentElement.lastElementChild.innerHTML = errorFirstName;
         first.classList.add('invalid');
         return false;
+    } else if (!value == ' '){
+      first.parentElement.lastElementChild.innerHTML = errorSpacingName;
+      first.classList.add('invalid');
+      return false;
+    } else if (!value == /[0-9]/){
+      first.parentElement.lastElementChild.innerHTML = errorNumberName;
+      first.classList.add('invalid');
+      return false;
     }
     //Test concluant
     else {
@@ -116,4 +134,13 @@ var checkFirstName = () => {
         return true;
     }
 }
+
+// DOM elements
+
+const lastName = getElementById('last');
+
+if (!value || value.lenght < 2) {
+  
+}
+
 
