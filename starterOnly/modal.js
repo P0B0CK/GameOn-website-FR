@@ -68,16 +68,21 @@ function closeModal() {
 const form = document.getElementById('form');
 
 const first = document.getElementById('first');
-const lastName = document.getElementById('last');
+const last = document.getElementById('last');
 const mail = document.getElementById('email');
 const birth = document.getElementById('birthdate');
 const participation = document.getElementById('quantity');
 
 
 // Error Message
-const errorFirstName = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+const errorFirstName = "Veuillez entrer 2 caractères ou plus pour le champ prénom.";
+const errorLastName = "Veuillez entrer 2 caractères ou plus pour le champ nom.";
 const errorSpacingName = "Les espaces ne sont pas autorisés.";
-const errorNumberName = "Les chiffres ne sont pas autorisés."
+const errorNumberName = "Les chiffres ne sont pas autorisés.";
+const errorMail = "Veuillez entrer un mail type : exemple@mail.com";
+const errorDayOfBirth = "Le jour doit être compris entre 1 et 31.";
+const errorMonthOfBirth = "Le mois doit être compris entre 1 et 12.";
+const errorYearOfBirth = "L'année doit être comprise entre 1990 et 2023.";
 
 form.addEventListener('submit', (e) => {validate(e)});
 
@@ -90,14 +95,14 @@ function validate(e) {
   console.log(e)
   e.preventDefault();
   let firstName = checkFirstName();
-  //let lastName = checkLastName();
+  let lastName = checkLastName();
+  let mailContact = checkMailContact();
 
   if (firstName) {
     alert('OK');
   } else {
     alert("Une erreur s'est produite : Vérifiez les champs");
   }
-    
 }
 
 
@@ -111,15 +116,92 @@ var checkFirstName = () => {
     let value = first.value;
     //test non concluant
     if (!value || value.trim().length < 2) {
-        first.parentElement.lastElementChild.innerHTML = errorFirstName;
-        first.classList.add('invalid');
-        return false;
+      first.parentElement.lastElementChild.innerHTML = errorFirstName;
+      first.classList.add('invalid');
+      return false;
     }
     //Test concluant
     else {
-        first.parentElement.lastElementChild.innerHTML = "";
-        first.classList.remove("invalid");
-        return true;
+      first.parentElement.lastElementChild.innerHTML = "";
+      first.classList.remove("invalid");
+      return true;
     }
+}
+
+let checkLastName = () => {
+  alert(last.value)
+    let value = last.value;
+    
+    if (!value || value.trim().length < 2) {
+      last.parentElement.lastElementChild.innerHTML = errorLastName;
+      last.classList.add('invalid');
+      return false;
+    }
+    else {
+      last.parentElement.lastElementChild.innerHTML = "";
+      last.classList.remove("invalid");
+      return true;
+    }
+}
+
+
+// CONTACT EMAIL
+
+
+let regEx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+let checkMailContact = () => {
+  alert(mail.value)
+    let value = mail.value
+
+    if (value.trim().match(regEx)) {
+      mail.classList.add("valid");
+      return true;
+
+    } if (value === ""){
+        mail.parentElement.lastElementChild.innerHTML = errorMail;
+        mail.classList.add("invalid");
+        return false;
+    
+      } else {
+        mail.parentElement.lastElementChild.innerHTML = errorMail;
+        mail.classList.add("invalid");
+        return false;
+    }
+}
+
+// BIRTHDAY DATE
+
+let dayBirth = () => {
+  let value = birth.value;
+
+if (value > 0 || value < 31) {
+  return true
+} else {
+    birth.parentElement.lastElementChild.innerHTML = errorDayOfBirth;
+    birth.classList.add("invalid");
+    return false;
+  }
+}
+
+let monthBirth = () => {
+  if (value > 0 || value < 12) {
+    return true
+  } else {
+      birth.parentElement.lastElementChild.innerHTML = errorMonthOfBirth;
+      birth.classList.add("invalid");
+      return false;
+    }
+  }
+
+let yearDate = () => {
+  
+  if (value > 1900 || value < 2023) {
+    return true
+  } else {
+      birth.parentElement.lastElementChild.innerHTML = errorYearOfBirth;
+      birth.classList.add("invalid");
+      return false;
+  }
 }
 

@@ -244,6 +244,7 @@ input {
 }
 .message-error{
   color:#e54858;
+  font-size: 12px;
 }
 .formData[data-error]::after {
   content: attr(data-error);
