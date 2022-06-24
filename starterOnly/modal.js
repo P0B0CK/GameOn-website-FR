@@ -52,6 +52,14 @@ closeBtn.forEach((close) => close.addEventListener("click", closeModal)); // Pou
 
 function closeModal() {
   modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
+    errorFirstName.style.display = "none";
+    errorLastName.style.display = "none";
+    errorSpacingName.style.display = "none";
+    errorNumberName.style.display = "none";
+    errorMail.style.display = "none";
+    errorBirthday.style.display = "none";
+    errorLocation.style.display = "none";
+    errorCGV.style.display = "none";
 }
 
 
@@ -72,6 +80,7 @@ const last = document.getElementById('last');
 const mail = document.getElementById('email');
 const birth = document.getElementById('birthdate');
 const participation = document.getElementById('quantity');
+const locationRadio = document.querySelector('input[name="location"]')
 
 
 // Error Message
@@ -80,9 +89,9 @@ const errorLastName = "Veuillez entrer 2 caractères ou plus pour le champ nom."
 const errorSpacingName = "Les espaces ne sont pas autorisés.";
 const errorNumberName = "Les chiffres ne sont pas autorisés.";
 const errorMail = "Veuillez entrer un mail type : exemple@mail.com";
-const errorDayOfBirth = "Le jour doit être compris entre 1 et 31.";
-const errorMonthOfBirth = "Le mois doit être compris entre 1 et 12.";
-const errorYearOfBirth = "L'année doit être comprise entre 1990 et 2023.";
+const errorBirthday = "Vous devez entrer votre date de naissance.";
+const errorLocation = "Vous devez choisir une option.";
+const errorCGV = "Vous devez vérifier que vous acceptez les termes et conditions.";
 
 form.addEventListener('submit', (e) => {validate(e)});
 
@@ -97,9 +106,11 @@ function validate(e) {
   let firstName = checkFirstName();
   let lastName = checkLastName();
   let mailContact = checkMailContact();
+  let IsValidBirthday = checkBirthdayDate();
+  let IsValidLocation = checkBtn();
 
-  if (firstName) {
-    alert('OK');
+  if (firstName && lastName && mailContact && IsValidBirthday && IsValidLocation) {
+    alert('Merci ! Votre réservation a été reçue.');
   } else {
     alert("Une erreur s'est produite : Vérifiez les champs");
   }
@@ -112,7 +123,7 @@ function validate(e) {
 
 
 var checkFirstName = () => {
-  alert(first.value)
+  //alert(first.value)
     let value = first.value;
     //test non concluant
     if (!value || value.trim().length < 2) {
@@ -129,7 +140,7 @@ var checkFirstName = () => {
 }
 
 let checkLastName = () => {
-  alert(last.value)
+  //alert(last.value)
     let value = last.value;
     
     if (!value || value.trim().length < 2) {
@@ -151,7 +162,7 @@ let checkLastName = () => {
 let regEx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
 let checkMailContact = () => {
-  alert(mail.value)
+  //alert(mail.value)
     let value = mail.value
 
     if (value.trim().match(regEx)) {
@@ -171,11 +182,11 @@ let checkMailContact = () => {
 }
 
 // BIRTHDAY DATE
-
+/*
 let dayBirth = () => {
   let value = birth.value;
 
-if (value > 0 || value < 31) {
+if (value > 0 && value < 31) {
   return true
 } else {
     birth.parentElement.lastElementChild.innerHTML = errorDayOfBirth;
@@ -185,7 +196,7 @@ if (value > 0 || value < 31) {
 }
 
 let monthBirth = () => {
-  if (value > 0 || value < 12) {
+  if (value > 0 && value < 12) {
     return true
   } else {
       birth.parentElement.lastElementChild.innerHTML = errorMonthOfBirth;
@@ -196,12 +207,64 @@ let monthBirth = () => {
 
 let yearDate = () => {
   
-  if (value > 1900 || value < 2023) {
+  if (value > 1900 && value < 2023) {
     return true
   } else {
-      birth.parentElement.lastElementChild.innerHTML = errorYearOfBirth;
-      birth.classList.add("invalid");
-      return false;
+    birth.parentElement.lastElementChild.innerHTML = errorYearOfBirth;
+    birth.classList.add("invalid");
+    return false;
   }
 }
+*/
+
+let checkBirthdayDate = () => {
+  console.log("date de naissance = " + birth.value)
+  let value = birth.value;
+
+  let valueDate = new Date(value);
+
+  
+  if (!isValidDate(value)) {
+    birth.parentElement.lastElementChild.innerHTML = errorBirthday;
+    birth.classList.add('invalid');
+    return false;
+  } else if(valueDate.getFullYear() >= 2004){
+    birth.parentElement.lastElementChild.innerHTML = errorBirthday;
+    birth.classList.add('invalid');
+  }
+  else {
+    birth.parentElement.lastElementChild.innerHTML = "";
+    birth.classList.remove("invalid");
+    return true;
+  }
+}
+
+const isValidDate = (date) => {
+  return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+}
+
+
+
+let checkBtn = () => {
+  console.log("date de naissance = " + birth.value)
+  let checkedLocation = document.querySelector('input[name="location"]:checked');
+
+  
+  if (!checkedLocation) {
+    locationRadio.parentElement.lastElementChild.innerHTML = errorLocation;
+    locationRadio.classList.add('invalid');
+    return false;
+  }
+  else {
+    locationRadio.parentElement.lastElementChild.innerHTML = "";
+    locationRadio.classList.remove("invalid");
+    return true;
+  }
+}
+
+// Checked
+
+document.getElementById('location1').checked = true;
+
+document.getElementById('checkbox1').checked = true;
 
