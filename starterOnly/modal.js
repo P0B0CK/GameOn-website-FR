@@ -51,15 +51,15 @@ closeBtn.forEach((close) => close.addEventListener("click", closeModal)); // Pou
 // Close modal action
 
 function closeModal() {
+  
   modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
-    errorFirstName.style.display = "none";
-    errorLastName.style.display = "none";
-    errorSpacingName.style.display = "none";
-    errorNumberName.style.display = "none";
-    errorMail.style.display = "none";
-    errorBirthday.style.display = "none";
-    errorLocation.style.display = "none";
-    errorCGV.style.display = "none";
+  
+let btnClear = document.querySelector('button'); 
+  let inputs = document.querySelectorAll('input'); 
+  btnClear.addEventListener('click', () => { 
+    inputs.forEach(input => input.value = '');
+    document.getElementsByClassName('message-error').forEach(span => span.value = "");
+   });
 }
 
 
@@ -86,10 +86,9 @@ const locationRadio = document.querySelector('input[name="location"]')
 // Error Message
 const errorFirstName = "Veuillez entrer 2 caractères ou plus pour le champ prénom.";
 const errorLastName = "Veuillez entrer 2 caractères ou plus pour le champ nom.";
-const errorSpacingName = "Les espaces ne sont pas autorisés.";
-const errorNumberName = "Les chiffres ne sont pas autorisés.";
 const errorMail = "Veuillez entrer un mail type : exemple@mail.com";
 const errorBirthday = "Vous devez entrer votre date de naissance.";
+const errorParticipation = "Renseignez une valeur comprise entre 0 et 99.";
 const errorLocation = "Vous devez choisir une option.";
 const errorCGV = "Vous devez vérifier que vous acceptez les termes et conditions.";
 
@@ -181,41 +180,11 @@ let checkMailContact = () => {
     }
 }
 
+
+
 // BIRTHDAY DATE
-/*
-let dayBirth = () => {
-  let value = birth.value;
 
-if (value > 0 && value < 31) {
-  return true
-} else {
-    birth.parentElement.lastElementChild.innerHTML = errorDayOfBirth;
-    birth.classList.add("invalid");
-    return false;
-  }
-}
 
-let monthBirth = () => {
-  if (value > 0 && value < 12) {
-    return true
-  } else {
-      birth.parentElement.lastElementChild.innerHTML = errorMonthOfBirth;
-      birth.classList.add("invalid");
-      return false;
-    }
-  }
-
-let yearDate = () => {
-  
-  if (value > 1900 && value < 2023) {
-    return true
-  } else {
-    birth.parentElement.lastElementChild.innerHTML = errorYearOfBirth;
-    birth.classList.add("invalid");
-    return false;
-  }
-}
-*/
 
 let checkBirthdayDate = () => {
   console.log("date de naissance = " + birth.value)
@@ -241,6 +210,32 @@ let checkBirthdayDate = () => {
 
 const isValidDate = (date) => {
   return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+}
+
+
+
+
+// NOMBRE DE PARTICIPATION
+
+
+
+let checkParticipation = () => {
+  let value = participation.value
+
+  if (value.trim() >= 0) {
+   participation.classList.add("valid");
+    return true;
+
+  } if (value === ""){
+    participation.parentElement.lastElementChild.innerHTML = errorMail;
+    participation.classList.add("invalid");
+      return false;
+  
+    } else {
+      participation.parentElement.lastElementChild.innerHTML = errorMail;
+      participation.classList.add("invalid");
+      return false;
+  }
 }
 
 
