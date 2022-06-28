@@ -73,6 +73,7 @@ let btnClear = document.querySelector('button');
 
 
 // DOM elements
+
 const form = document.getElementById('form');
 
 const first = document.getElementById('first');
@@ -84,12 +85,14 @@ const locationRadio = document.querySelector('input[name="location"]');
 const btnCGU = document.getElementById('checkbox1');
 
 
+
 // Error Message
+
 const errorFirstName = "Veuillez entrer 2 caractères ou plus pour le champ prénom.";
 const errorLastName = "Veuillez entrer 2 caractères ou plus pour le champ nom.";
 const errorMail = "Veuillez entrer un mail type : exemple@mail.com";
 const errorBirthday = "Vous devez entrer votre date de naissance.";
-const errorParticipation = "Renseignez une valeur comprise entre 0 et 99.";
+const errorParticipation = "Veuillez renseigner une valeur comprise entre 0 et 99.";
 const errorLocation = "Vous devez choisir une option.";
 const errorCGU = "Vous devez accepter les conditions d'utilisation.";
 
@@ -107,14 +110,19 @@ function validate(e) {
   let lastName = checkLastName();
   let mailContact = checkMailContact();
   let IsValidBirthday = checkBirthdayDate();
+  let IsValidParticipation = checkParticipation();
   let IsValidLocation = checkBtn();
-  let ISValidCGU = checkCGU();
+  let IsValidCGU = checkCGU();
 
-  if (firstName && lastName && mailContact && IsValidBirthday && IsValidLocation && ISValidCGU) {
+
+  if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) {
     alert('Merci ! Votre réservation a été reçue.');
-  } else {
-    alert("Une erreur s'est produite : Vérifiez les champs");
-  }
+    //closeModal();
+  } 
+  
+    else {
+      alert("Une erreur s'est produite : Vérifiez les champs");
+    }
 }
 
 
@@ -216,31 +224,31 @@ const isValidDate = (date) => {
 
 
 
-
 // NOMBRE DE PARTICIPATION
 
 
 
 let checkParticipation = () => {
   let value = participation.value
+  let regexNumbers = /^[0-9]{1,2}$/
 
-  if (value.trim() >= 0) {
+  if (value.trim().match(regexNumbers) >= 0) {
    participation.classList.add("valid");
     return true;
   } 
     // Si ce champ à une valeur non numérique alors elle est de 0
-    else if (value == isNaN){
+    else if (value === isNaN) {
       console.log('Si ce champ à une valeur non numérique alors elle est de 0')
       value === 0;
     } 
-    // Si ce champ à une valeur null alors elle est de 0
-    else if (value == null){
-      console.log('Si ce champ à une valeur null alors elle est de 0')
+    // Si ce champ n'est pas renseigné alors elle est de 0
+    else if (value == null) {
+      console.log('Si ce champ n\'est pas renseigné alors elle est de 0')
       value === 0;
     } 
     
       else {
-        participation.parentElement.lastElementChild.innerHTML = errorMail;
+        participation.parentElement.lastElementChild.innerHTML = errorParticipation;
         participation.classList.add("invalid");
         return false;
       }
@@ -257,12 +265,14 @@ let checkBtn = () => {
     locationRadio.classList.add('invalid');
     return false;
   }
-  else {
-    locationRadio.parentElement.lastElementChild.innerHTML = "";
-    locationRadio.classList.remove("invalid");
-    return true;
-  }
+    else {
+      locationRadio.parentElement.lastElementChild.innerHTML = "";
+      locationRadio.classList.remove("invalid");
+      return true;
+    }
 }
+
+
 
 // Checked
 
