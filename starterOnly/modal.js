@@ -80,7 +80,8 @@ const last = document.getElementById('last');
 const mail = document.getElementById('email');
 const birth = document.getElementById('birthdate');
 const participation = document.getElementById('quantity');
-const locationRadio = document.querySelector('input[name="location"]')
+const locationRadio = document.querySelector('input[name="location"]');
+const btnCGU = document.getElementById('checkbox1');
 
 
 // Error Message
@@ -90,7 +91,7 @@ const errorMail = "Veuillez entrer un mail type : exemple@mail.com";
 const errorBirthday = "Vous devez entrer votre date de naissance.";
 const errorParticipation = "Renseignez une valeur comprise entre 0 et 99.";
 const errorLocation = "Vous devez choisir une option.";
-const errorCGV = "Vous devez vérifier que vous acceptez les termes et conditions.";
+const errorCGU = "Vous devez accepter les conditions d'utilisation.";
 
 form.addEventListener('submit', (e) => {validate(e)});
 
@@ -107,8 +108,9 @@ function validate(e) {
   let mailContact = checkMailContact();
   let IsValidBirthday = checkBirthdayDate();
   let IsValidLocation = checkBtn();
+  let ISValidCGU = checkCGU();
 
-  if (firstName && lastName && mailContact && IsValidBirthday && IsValidLocation) {
+  if (firstName && lastName && mailContact && IsValidBirthday && IsValidLocation && ISValidCGU) {
     alert('Merci ! Votre réservation a été reçue.');
   } else {
     alert("Une erreur s'est produite : Vérifiez les champs");
@@ -241,7 +243,6 @@ let checkParticipation = () => {
 
 
 let checkBtn = () => {
-  console.log("date de naissance = " + birth.value)
   let checkedLocation = document.querySelector('input[name="location"]:checked');
 
   
@@ -263,3 +264,21 @@ document.getElementById('location1').checked = true;
 
 document.getElementById('checkbox1').checked = true;
 
+
+
+// Conditions Générales d'utilisation 
+
+
+let checkCGU = () => {
+
+  if (btnCGU.checked == true) {
+    btnCGU.parentElement.lastElementChild.innerHTML = "";
+    btnCGU.classList.add('valid');
+    return true;
+  }
+  else {
+    btnCGU.parentElement.lastElementChild.innerHTML = errorCGU;
+    btnCGU.classList.remove("invalid");
+    return false;
+  }
+}
