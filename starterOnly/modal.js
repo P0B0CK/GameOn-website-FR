@@ -51,16 +51,30 @@ closeBtn.forEach((close) => close.addEventListener("click", closeModal)); // Pou
 // Close modal action
 
 function closeModal() {
-  
-  modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
-  
-let btnClear = document.querySelector('button'); 
-  let inputs = document.querySelectorAll('input'); 
-  btnClear.addEventListener('click', () => { 
-    inputs.forEach(input => input.value = '');
-    document.getElementsByClassName('message-error').forEach(span => span.value = "");
-   });
+
+let firstName = checkFirstName();
+let lastName = checkLastName();
+let mailContact = checkMailContact();
+let IsValidBirthday = checkBirthdayDate();
+let IsValidParticipation = checkParticipation();
+let IsValidLocation = checkBtn();
+let IsValidCGU = checkCGU();
+
+let inputs = document.querySelectorAll('input');
+let spans = document.querySelector('.error-message span')
+
+inputs.forEach(input => input.value = '');
+spans.forEach(span  => span.value ='');
+modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
 }
+
+// A chaque fermeture du modal on remet à zéro les inputs et on réinitialise les messages d'erreurs
+/*  if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) { 
+    
+    inputs.forEach(input => input.value = '');
+    
+  };*/
+
 
 
 /* --------------------------------------------------------------------------------------*/
@@ -124,6 +138,28 @@ function validate(e) {
       alert("Une erreur s'est produite : Vérifiez les champs");
     }
 }
+/*
+function reinitialisation(e) {
+  console.log(e)
+  e.preventDefault();
+  let firstName = checkFirstName();
+  let lastName = checkLastName();
+  let mailContact = checkMailContact();
+  let IsValidBirthday = checkBirthdayDate();
+  let IsValidParticipation = checkParticipation();
+  let IsValidLocation = checkBtn();
+  let IsValidCGU = checkCGU();
+
+
+  if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) {
+    alert('Merci ! Votre réservation a été reçue.');
+    //closeModal();
+  } 
+  
+    else {
+      alert("Une erreur s'est produite : Vérifiez les champs");
+    }
+}*/
 
 
 /**
