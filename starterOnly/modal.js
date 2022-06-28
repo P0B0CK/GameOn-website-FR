@@ -227,17 +227,23 @@ let checkParticipation = () => {
   if (value.trim() >= 0) {
    participation.classList.add("valid");
     return true;
-
-  } if (value === ""){
-    participation.parentElement.lastElementChild.innerHTML = errorMail;
-    participation.classList.add("invalid");
-      return false;
-  
-    } else {
-      participation.parentElement.lastElementChild.innerHTML = errorMail;
-      participation.classList.add("invalid");
-      return false;
-  }
+  } 
+    // Si ce champ à une valeur non numérique alors elle est de 0
+    else if (value == isNaN){
+      console.log('Si ce champ à une valeur non numérique alors elle est de 0')
+      value === 0;
+    } 
+    // Si ce champ à une valeur null alors elle est de 0
+    else if (value == null){
+      console.log('Si ce champ à une valeur null alors elle est de 0')
+      value === 0;
+    } 
+    
+      else {
+        participation.parentElement.lastElementChild.innerHTML = errorMail;
+        participation.classList.add("invalid");
+        return false;
+      }
 }
 
 
