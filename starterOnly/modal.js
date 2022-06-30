@@ -99,7 +99,7 @@ function validate(e) {
 
 /**
  * 
- * @returns fonction de contrôl du champ FirstName
+ * @returns fonction de contrôl des champs du formulaire
  */
 
 var checkFirstName = () => {
@@ -113,7 +113,7 @@ var checkFirstName = () => {
   //Test concluant
   else {
     first.parentElement.lastElementChild.innerHTML = "";
-    first.classList.remove("valid");
+    first.classList.remove("invalid");
     return true;
   }
 }
@@ -139,7 +139,8 @@ let checkMailContact = () => {
   let value = mail.value
 
   if (value.trim().match(regEx)) {
-    mail.classList.add("valid");
+    mail.parentElement.lastElementChild.innerHTML = "";
+    mail.classList.remove("invalid");
     return true;
 
   } if (value === "") {
@@ -183,7 +184,7 @@ let checkParticipation = () => {
   let regexNumbers = /^[0-9]{1,2}$/
 
   if (value.trim().match(regexNumbers)) {
-    participation.classList.add("valid");
+    participation.classList.remove("invalid");
     return true;
   }
     else {
@@ -211,18 +212,18 @@ let checkBtn = () => {
 }
 
 
-//document.getElementById('checkbox1').checked = true;
-
 let checkCGU = () => {
 
   if (btnCGU.checked == true) {
     btnCGU.parentElement.lastElementChild.innerHTML = "";
-    btnCGU.classList.add('valid');
+    btnCGU.classList.remove('invalid');
     return true;
   }
   else {
     btnCGU.parentElement.lastElementChild.innerHTML = errorCGU;
-    btnCGU.classList.remove("invalid");
+    btnCGU.classList.add("invalid");
     return false;
   }
 }
+
+//document.getElementById('checkbox1').checked = true;
