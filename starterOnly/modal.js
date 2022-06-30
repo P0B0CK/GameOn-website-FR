@@ -1,13 +1,3 @@
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-/* ----------------------------- MODAL EVENT OPEN -------------------------------------- */
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-
-
-
 // DOM Elements
 const form = document.getElementById('form'); // Formulaire
 const modalbg = document.querySelector(".bground"); // Ensemble du modal
@@ -21,6 +11,12 @@ const birth = document.getElementById('birthdate');
 const participation = document.getElementById('quantity');
 const locationRadio = document.querySelector('input[name="location"]');
 const btnCGU = document.getElementById('checkbox1');
+
+const closeBtn = document.querySelectorAll(".close"); // Boutons de fermeture du modal
+
+const isValidDate = (date) => {
+  return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+}
 
 // Error Message
 
@@ -42,23 +38,22 @@ function editNav() {
 }
 
 
-// launch modal event
+/**
+ * Event ouverture du modal
+ */
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+/**
+ * Ouvrir le modal
+ */
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// DOM elements
-
-const closeBtn = document.querySelectorAll(".close"); // Boutons de fermeture du modal
-
-
-// Close modal event
-
-closeBtn.forEach((close) => close.addEventListener("click", closeModal)); // Pour chaque boutons "close" alors au clic déclenche closeModal
-
+/**
+ * Bouton de fermeture du modal
+ */
+closeBtn.forEach((close) => close.addEventListener("click", closeModal));
 
 
 /**
@@ -66,38 +61,14 @@ closeBtn.forEach((close) => close.addEventListener("click", closeModal)); // Pou
  */
 function closeModal() {
 
-
-  let inputs = document.querySelectorAll('input');
-  let spans = document.querySelector('span.error-message')
-
   form.reset();
   form.querySelectorAll('.formData').forEach(el => {
     el.lastElementChild.innerHTML = "";
     el.querySelector('input').classList.remove("invalid");
   })
-  //inputs.forEach(input => input.value = '');
-  //spans.forEach(span => span.value = '');
+
   modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
 }
-
-// A chaque fermeture du modal on remet à zéro les inputs et on réinitialise les messages d'erreurs
-/*  if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) { 
-    
-    inputs.forEach(input => input.value = '');
-    
-  };*/
-
-
-
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------- FORM SAISIE DES CHAMPS ---------------------------------- */
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------------*/
-
-
 
 form.addEventListener('submit', (e) => { validate(e) });
 
@@ -120,37 +91,11 @@ function validate(e) {
 
   if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) {
     alert('Merci ! Votre réservation a été reçue.');
-    //closeModal();
-  }
-
-  else {
-    //alert("Une erreur s'est produite : Vérifiez les champs");
-  }
-}
-/*
-function reinitialisation(e) {
-  console.log(e)
-  e.preventDefault();
-  let firstName = checkFirstName();
-  let lastName = checkLastName();
-  let mailContact = checkMailContact();
-  let IsValidBirthday = checkBirthdayDate();
-  let IsValidParticipation = checkParticipation();
-  let IsValidLocation = checkBtn();
-  let IsValidCGU = checkCGU();
-
-
-  if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) {
-    alert('Merci ! Votre réservation a été reçue.');
-    //closeModal();
+    closeModal();
   } 
-  
     else {
-      alert("Une erreur s'est produite : Vérifiez les champs");
     }
-}*/
-
-
+}
 
 /**
  * 
@@ -168,13 +113,12 @@ var checkFirstName = () => {
   //Test concluant
   else {
     first.parentElement.lastElementChild.innerHTML = "";
-    first.classList.remove("invalid");
+    first.classList.remove("valid");
     return true;
   }
 }
 
 let checkLastName = () => {
-  //alert(last.value)
   let value = last.value;
 
   if (!value || value.trim().length < 2) {
@@ -189,14 +133,9 @@ let checkLastName = () => {
   }
 }
 
-
-// CONTACT EMAIL
-
-
 let regEx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
 let checkMailContact = () => {
-  //alert(mail.value)
   let value = mail.value
 
   if (value.trim().match(regEx)) {
@@ -214,11 +153,6 @@ let checkMailContact = () => {
     return false;
   }
 }
-
-
-
-// BIRTHDAY DATE
-
 
 
 let checkBirthdayDate = () => {
@@ -243,15 +177,6 @@ let checkBirthdayDate = () => {
   }
 }
 
-const isValidDate = (date) => {
-  return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
-}
-
-
-
-// NOMBRE DE PARTICIPATION
-
-
 
 let checkParticipation = () => {
   let value = participation.value
@@ -261,26 +186,12 @@ let checkParticipation = () => {
     participation.classList.add("valid");
     return true;
   }
-  /*
-  // Si ce champ à une valeur non numérique alors elle est de 0
-  else if (value === isNaN) {
-    console.log('Si ce champ à une valeur non numérique alors elle est de 0')
-    value === 0;
-  }
-  // Si ce champ n'est pas renseigné alors elle est de 0
-  else if (value == null) {
-    console.log('Si ce champ n\'est pas renseigné alors elle est de 0')
-    value === 0;
-  }
-  */
-
-  else {
-    participation.parentElement.lastElementChild.innerHTML = errorParticipation;
-    participation.classList.add("invalid");
-    return false;
-  }
+    else {
+      participation.parentElement.lastElementChild.innerHTML = errorParticipation;
+      participation.classList.add("invalid");
+      return false;
+    }
 }
-
 
 
 let checkBtn = () => {
@@ -292,25 +203,15 @@ let checkBtn = () => {
     locationRadio.classList.add('invalid');
     return false;
   }
-  else {
-    locationRadio.parentElement.lastElementChild.innerHTML = "";
-    locationRadio.classList.remove("invalid");
-    return true;
-  }
+    else {
+      locationRadio.parentElement.lastElementChild.innerHTML = "";
+      locationRadio.classList.remove("invalid");
+      return true;
+    }
 }
 
 
-
-// Checked
-
-//document.getElementById('location1').checked = true;
-
-document.getElementById('checkbox1').checked = true;
-
-
-
-// Conditions Générales d'utilisation 
-
+//document.getElementById('checkbox1').checked = true;
 
 let checkCGU = () => {
 

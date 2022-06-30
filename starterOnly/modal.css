@@ -246,6 +246,12 @@ input {
   color:#e54858;
   font-size: 12px;
 }
+.invalid{
+  border: 2px solid #e54858;
+}
+.valid{
+  border: 2px solid white;
+}
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
