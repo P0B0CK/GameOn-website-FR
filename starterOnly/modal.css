@@ -193,7 +193,7 @@ main {
 
 .bground {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   left: 0;
   top: 0;
@@ -220,6 +220,7 @@ main {
 
 .content--confirmation {
   z-index: 0;
+  display: none;
   position: relative;
   margin: 5% auto;
   width: 100%;

@@ -3,6 +3,8 @@ const form = document.getElementById('form'); // Formulaire
 const modalbg = document.querySelector(".bground"); // Ensemble du modal
 const modalBtn = document.querySelectorAll(".modal-btn"); // Boutons d'ouverture du modal
 const formData = document.querySelectorAll(".formData"); // champs des saisies
+const modalRegister = document.querySelector(".content--confirmation");
+const btnConfirmation = document.querySelector(".btn-soon");
 
 const first = document.getElementById('first');
 const last = document.getElementById('last');
@@ -55,6 +57,12 @@ function launchModal() {
  */
 closeBtn.forEach((close) => close.addEventListener("click", closeModal));
 
+/**
+ * Bouton "A Bientôt !" quitte/ferme le modal 
+ */
+
+document.querySelector(".btn-soon").addEventListener("click", closeModal);
+
 
 /**
  * Close modal action
@@ -90,8 +98,8 @@ function validate(e) {
 
 
   if (firstName && lastName && mailContact && IsValidBirthday && IsValidParticipation && IsValidLocation && IsValidCGU) {
-    alert('Merci ! Votre réservation a été reçue.');
-    closeModal();
+    form.style.display = "none";
+    modalRegister.style.display = "block";
   } 
     else {
     }
