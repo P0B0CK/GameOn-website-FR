@@ -102,7 +102,7 @@ function validate(e) {
  * @returns fonction de contrôl des champs du formulaire
  */
 
-var checkFirstName = () => {
+let checkFirstName = () => {
   let value = first.value;
   //test non concluant
   if (!value || value.trim().length < 2) {
