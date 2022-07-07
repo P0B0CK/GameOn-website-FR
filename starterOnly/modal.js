@@ -39,6 +39,10 @@ function editNav() {
   }
 }
 
+// Variables
+
+let regEx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
 
 /**
  * Event ouverture du modal
@@ -76,6 +80,8 @@ function closeModal() {
   })
 
   modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
+  form.style.display = "block";
+  modalRegister.style.display = "none";
 }
 
 form.addEventListener('submit', (e) => { validate(e) });
@@ -102,6 +108,7 @@ function validate(e) {
     modalRegister.style.display = "block";
   } 
     else {
+      first.addEventListener("input", checkFirstName);
     }
 }
 
@@ -141,7 +148,6 @@ let checkLastName = () => {
   }
 }
 
-let regEx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
 let checkMailContact = () => {
   let value = mail.value
@@ -169,13 +175,13 @@ let checkBirthdayDate = () => {
   let value = birth.value;
 
   let valueDate = new Date(value);
-
+  let currentDate = new Date();
 
   if (!isValidDate(value)) {
     birth.parentElement.lastElementChild.innerHTML = errorBirthday;
     birth.classList.add('invalid');
     return false;
-  } else if (valueDate.getFullYear() >= 2004) {
+  } else if (valueDate.getFullYear() >= currentDate.getFullYear()-18) {
     birth.parentElement.lastElementChild.innerHTML = errorBirthday;
     birth.classList.add('invalid');
   }
