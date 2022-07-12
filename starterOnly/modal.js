@@ -109,6 +109,12 @@ function validate(e) {
   } 
     else {
       first.addEventListener("input", checkFirstName);
+      last.addEventListener("input", checkLastName);
+      mail.addEventListener("input", checkMailContact);
+      birth.addEventListener("input", checkBirthdayDate);
+      participation.addEventListener("input", checkParticipation);
+      locationRadio.addEventListener("input", checkBtn);
+      btnCGU.addEventListener("input", checkCGU);
     }
 }
 
