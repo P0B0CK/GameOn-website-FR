@@ -1,6 +1,7 @@
 // DOM Elements
 const form = document.getElementById('form'); // Formulaire
 const modalbg = document.querySelector(".bground"); // Ensemble du modal
+const heroContent = document.querySelector(".hero-content"); // contenu en page
 const modalBtn = document.querySelectorAll(".modal-btn"); // Boutons d'ouverture du modal
 const formData = document.querySelectorAll(".formData"); // champs des saisies
 const modalRegister = document.querySelector(".content--confirmation");
@@ -54,6 +55,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
  */
 function launchModal() {
   modalbg.style.display = "block";
+  heroContent.style.display= "none";
 }
 
 /**
@@ -82,6 +84,7 @@ function closeModal() {
   modalbg.style.display = "none";     // closeModal n'affiche plus le modalbg
   form.style.display = "block";
   modalRegister.style.display = "none";
+  heroContent.style.display= "block";
 }
 
 form.addEventListener('submit', (e) => { validate(e) });

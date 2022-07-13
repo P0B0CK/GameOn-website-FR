@@ -594,7 +594,7 @@ footer {
   }
 
   .bground{
-    position: fixed;
+    position: absolute;
     top: 0;
     margin-top: 60px;
   }
@@ -603,10 +603,7 @@ footer {
     margin: 0;
     border-radius: 10px 10px 0 0;
   }
-
-  .modal-body{
-  }
-
+  
   .hero-section {
     display: block;
     box-shadow: unset;
